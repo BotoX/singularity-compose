@@ -290,9 +290,12 @@ class Project(object):
             bot.exit("Cannot find %s, is it up?" % name)
 
         if instance.exists():
-            self.client.quiet = True
+            self.client.quiet = False
             result = self.client.run(
-                instance.instance.get_uri(), sudo=self.sudo, return_result=True
+                instance.instance.get_uri(),
+                args=instance.args,
+                sudo=self.sudo,
+                return_result=True
             )
 
             if result["return_code"] != 0:
